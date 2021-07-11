@@ -56,7 +56,7 @@ const goodConfig = {
       upstream: 'upstream:dev',
       mergeMethod: 'rebase',
       assignees: ['tom'],
-      reviewers: ['jerry'],
+      reviewers: ['jerry', 'org/team-1'],
       conflictReviewers: ['spike']
     },
     {
@@ -68,7 +68,8 @@ const goodConfig = {
       conflictReviewers: ['saurabh702']
     }
   ],
-  label: 'pull'
+  label: 'pull',
+  conflictLabel: 'merge-conflict'
 }
 const getPull = () => new Pull(github, { owner: 'wei', repo: 'fork', logger: app.log }, goodConfig)
 
@@ -306,7 +307,7 @@ describe('pull - routineCheck', () => {
     })
     expect(github.pulls.createReviewRequest).toHaveBeenCalledTimes(1)
     expect(github.pulls.createReviewRequest).nthCalledWith(1, {
-      owner: 'wei', repo: 'fork', pull_number: 12, reviewers: ['jerry']
+      owner: 'wei', repo: 'fork', pull_number: 12, reviewers: ['jerry'], team_reviewers: ['team-1']
     })
   })
 })
@@ -409,7 +410,7 @@ describe('pull - checkAutoMerge', () => {
     try {
       expect(github.issues.getLabel).toHaveBeenCalledTimes(1)
     } catch (e) {
-      expect(pull.addLabel('merge-conflict', 'ff0000', 'Resolve conflicts manually')).resolves.not.toBeNull()
+      expect(pull.addLabel(pull.config.conflictLabel, 'ff0000', 'Resolve conflicts manually')).resolves.not.toBeNull()
     }
 
     expect(github.issues.update).toHaveBeenCalledTimes(1)
@@ -606,7 +607,8 @@ describe('pull - misc', () => {
           conflictReviewers: ['saurabh702']
         }
       ],
-      label: 'pull'
+      label: 'pull',
+      conflictLabel: 'merge-conflict'
     })
 
     expect(pull.config.rules[0].mergeMethod).toBe('merge')

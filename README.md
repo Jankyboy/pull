@@ -55,7 +55,7 @@
 
 Trusted by [![Repository Count](https://badgen.net/https/raw.githack.com/pull-app/stats/master/badges/managing.plain.json?style=flat)](https://probot.github.io/apps/pull/) repositories, triggered [![Triggered #](https://badgen.net/runkit/pull-triggered-badge-5e55hqhkhmid?style=flat&label=)](https://github.com/issues?q=author%3Aapp%2Fpull).
 
-Want to support this open source service? [Please star it : )](https://github.com/wei/pull)
+_Can you help keep this open source service alive? **[💖 Please sponsor : )](https://prod.download/pull-readme-sponsor)**_
 
 
 ## Features
@@ -73,8 +73,9 @@ Want to support this open source service? [Please star it : )](https://github.co
  - Upstream must be in the same fork network.
  - :warning: _Make a backup if you've made changes._
 
-
 ## Getting Started
+
+**[⭐ Star this project](https://github.com/wei/pull)** (Highly recommended, starred users may receive priority over regular users)
 
 ### Basic Setup
 
@@ -115,6 +116,7 @@ Pull app will automatically watch and pull in upstream's default (master) branch
         conflictReviewers:      # Optional, on merge conflict assign a reviewer
           - wei
     label: ":arrow_heading_down: pull"  # Optional
+    conflictLabel: "merge-conflict"     # Optional, on merge conflict assign a custom label, Default: merge-conflict
     ```
 
  4. Go to `https://pull.git.ci/check/${owner}/${repo}` to validate your `.github/pull.yml` (Public repos only). See [#234](https://github.com/wei/pull/issues/234) for another way to validate it.
@@ -122,7 +124,7 @@ Pull app will automatically watch and pull in upstream's default (master) branch
 
 ### Trigger manually
 
-Go to `https://pull.git.ci/process/${owner}/${repo}` to manually trigger pull. 
+Go to `https://pull.git.ci/process/${owner}/${repo}` to manually trigger pull.
 **Note:** Nothing will happen if your branch is already even with upstream.
 
 
